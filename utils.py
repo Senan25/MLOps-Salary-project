@@ -9,7 +9,7 @@ def load_config(config_file="params.yaml"):
     Parameters:
     config_file (str): Path to the configuration file. Default is 'params.yaml'.
 
-    Returns:
+    Returns:s
     dict: Configuration parameters as a dictionary.
     """
     try:
@@ -21,7 +21,7 @@ def load_config(config_file="params.yaml"):
     except yaml.YAMLError as e:
         raise ValueError(f"Error parsing the YAML file: {e}")
 
-def save_model_and_params(model, params, model_file="model.pkl", params_file="best_params.json"):
+def save_model_and_params(model, params, model_file="serve/model.pkl", params_file="best_params.json"):
     """
     Save a trained model as a .pkl file and its parameters as a .json file.
 
