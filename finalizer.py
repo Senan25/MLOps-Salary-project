@@ -9,6 +9,6 @@ except Exception as e:
     raise f"Cannot load config due to {e}"
 
 
-best_model, X_test, y_test = train(config)
+best_model, X_test, y_test = train()
 
 evaluate(best_model, X_test, y_test, config)

@@ -7,7 +7,7 @@ from sklearn.pipeline import Pipeline
 from utils import load_config, save_model_and_params
 from data_pull_push import retrieve_data_from_azure
 
-def train(config):
+def train():
     # Load configurations
     config = load_config()
 
