@@ -18,7 +18,10 @@ jobs:
           python-version: '3.12'
 
       - name: Install Dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          pip install dvc==3.58.0 
+          dvc status
 
       # - name: Setup Azure CLI
       #   uses: azure/setup-cli@v2
