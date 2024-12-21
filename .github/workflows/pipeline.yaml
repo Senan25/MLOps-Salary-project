@@ -37,4 +37,4 @@ jobs:
           raw_data_name: ${{ secrets.raw_data_name }}
 
       - name: Start Development Process (Training, Testing, and Logging)
-        run: dvc repro
+        run: python3 train.py
