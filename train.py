@@ -12,7 +12,11 @@ def train(config):
     #config = load_config()
 
     # Read the dataset
-    data = retrieve_data_from_azure()
+    try:
+        data = retrieve_data_from_azure()
+        print('raw datat successfully loaded')
+    except Exception as e:
+        print(f"raw data CANNOT loaded due to {e}")
 
     # Define input and target columns
     X = data[[col for col in config['preprocessor']['categorical']['features']] + [col for col in config['preprocessor']['numerical']['features']]]
