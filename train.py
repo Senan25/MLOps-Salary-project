@@ -9,7 +9,7 @@ from data_pull_push import retrieve_data_from_azure
 
 def train(config):
     # Load configurations
-    config = load_config()
+    #config = load_config()
 
     # Read the dataset
     data = retrieve_data_from_azure()
