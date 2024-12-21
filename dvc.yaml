@@ -1,6 +1,6 @@
 stages:
   preprocess:
-    cmd: python finalizer.py
+    cmd: python3 finalizer.py
     deps:
       - params.yaml
     outs:
