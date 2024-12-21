@@ -14,7 +14,7 @@ def func_train():
     # Read the dataset
     # try:
     data = retrieve_data_from_azure()
-    print('raw data successfully loaded', len(data))
+    # print('raw data successfully loaded', len(data))
 
     # except Exception as e:
     #     print(f"raw data CANNOT loaded due to {e}")
