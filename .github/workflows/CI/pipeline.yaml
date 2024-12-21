@@ -1,0 +1,31 @@
+name: All pipeline
+
+on:
+    push:
+      branches:
+        - main
+
+jobs:
+  integration:  # Model Training, Testing, and Logging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version:  3.12.5
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Login to Azure
+        env:
+          connection_string: ${{ secrets.connection_string }}
+          raw_data_container_name: ${{ secrets.raw_data_container_name }}
+          raw_data_name: ${{ secrets.raw_data_name }}
+
+
+      - name: Start all development process ---> Training, Testing and Logging
+        run: dvc repro

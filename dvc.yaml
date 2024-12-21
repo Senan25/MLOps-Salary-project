@@ -1,0 +1,11 @@
+stages:
+  preprocess:
+    cmd: python finalizer.py
+    deps:
+      - params.yaml
+    outs:
+      - blob-raw_dataset.csv
+      - X_test.csv
+      - X_train.csv
+      - y_test.csv
+      - y_train.csv
