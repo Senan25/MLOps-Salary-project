@@ -15,8 +15,7 @@ def train(config):
     data = retrieve_data_from_azure()
 
     # Define input and target columns
-    X = data[[col for col in config['preprocessor']['categorical']['features']] +
-            [col for col in config['preprocessor']['numerical']['features']]]
+    X = data[[col for col in config['preprocessor']['categorical']['features']] + [col for col in config['preprocessor']['numerical']['features']]]
     y = data['Salary']
 
     # Preprocessing transformers
