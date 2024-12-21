@@ -20,7 +20,11 @@ jobs:
       - name: Install Dependencies
         run: |
           pip install -r requirements.txt
+
+      - name: DVC
+        run: |
           pip install dvc==3.58.0 
+          dvc init
           dvc status
 
       # - name: Setup Azure CLI
