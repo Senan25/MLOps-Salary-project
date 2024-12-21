@@ -14,7 +14,7 @@ def train(config):
     # Read the dataset
     try:
         data = retrieve_data_from_azure()
-        print('raw datat successfully loaded')
+        print('raw data successfully loaded')
     except Exception as e:
         print(f"raw data CANNOT loaded due to {e}")
 
