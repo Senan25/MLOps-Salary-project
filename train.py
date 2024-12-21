@@ -7,14 +7,15 @@ from sklearn.pipeline import Pipeline
 from utils import load_config, save_model_and_params
 from data_pull_push import retrieve_data_from_azure
 
-def train():
+def func_train():
     # Load configurations
     config = load_config()
 
     # Read the dataset
     try:
         data = retrieve_data_from_azure()
-        print('raw data successfully loaded')
+        print('raw data successfully loaded', len(data))
+
     except Exception as e:
         print(f"raw data CANNOT loaded due to {e}")
 
