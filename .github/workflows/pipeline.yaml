@@ -1,9 +1,9 @@
 name: All pipeline
 
 on:
-    push:
-      branches:
-        - main
+  push:
+    branches:
+      - main
 
 jobs:
   integration:  # Model Training, Testing, and Logging
@@ -15,17 +15,20 @@ jobs:
       - name: Set Up Python
         uses: actions/setup-python@v4
         with:
-          python-version:  3.12.5
+          python-version: '3.12'
 
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
+      # - name: Setup Azure CLI
+      #   uses: azure/setup-cli@v2
+
       - name: Login to Azure
+        run: echo 'logining to Azure'
         env:
           connection_string: ${{ secrets.connection_string }}
           raw_data_container_name: ${{ secrets.raw_data_container_name }}
           raw_data_name: ${{ secrets.raw_data_name }}
 
-
-      - name: Start all development process ---> Training, Testing and Logging
+      - name: Start Development Process (Training, Testing, and Logging)
         run: dvc repro
