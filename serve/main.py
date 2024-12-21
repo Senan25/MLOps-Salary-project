@@ -1,15 +1,14 @@
 from fastapi import FastAPI, Form
 from fastapi.responses import HTMLResponse
-from pydantic import BaseModel
-import pickle
+from joblib import load
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 from fastapi.requests import Request
+import pandas as pd
 
 # Load the model
-with open("model.pkl", "rb") as f:
-    model = pickle.load(f)
+model = load("rf_model.pkl")
 
 app = FastAPI()
 
@@ -32,11 +31,16 @@ templates = Jinja2Templates(directory="templates")
 async def get_form(request: Request):
     return templates.TemplateResponse("form.html", {"request": request})
 
-@app.post("/predict")
-async def predict(age: int = Form(...), experience: int = Form(...), marital_status: str = Form(...)):
+@app.post("/predict", response_class=HTMLResponse)
+async def predict(request: Request, age: int = Form(...), experience: int = Form(...), marital_status: str = Form(...)):
     # Transform input into the required format
-    input_data = [[age, experience, marital_status]]
+    input_data = {
+        "Marital Status": marital_status,
+        "Experience": experience,        
+        "Age": age                  
+    }
+    input_data = pd.DataFrame([input_data])
     prediction = model.predict(input_data)
-    return {"Predicted Salary": prediction[0]}
+    return templates.TemplateResponse("result.html", {"request": request, "salary": prediction[0]})
 
 # Directory structure should include a templates folder for HTML and static for CSS.
