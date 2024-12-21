@@ -81,3 +81,5 @@ def func_train():
 
     return best_model, X_test, y_test
 
+func_train()
+
