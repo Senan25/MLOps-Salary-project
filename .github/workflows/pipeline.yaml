@@ -42,7 +42,7 @@ jobs:
 
       - name: Logging (Data versions)
         run: |
-          dvc remote add -r $cloud_remote $dvc_container_name_path
+          dvc remote add -d $cloud_remote $dvc_container_name_path
           dvc remote modify $cloud_remote connection_string $connection_string
           dvc push
 
