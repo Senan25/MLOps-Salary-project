@@ -13,6 +13,9 @@ jobs:
       connection_string: ${{ secrets.connection_string }}
       raw_data_container_name: ${{ secrets.raw_data_container_name }}
       raw_data_name: ${{ secrets.raw_data_name }}
+      cloud_remote: ${{ secrets.cloud_remote }}  # like aws_remote
+      dvc_container_name_path: ${{ secrets.dvc_container_name_path }}
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -38,5 +41,9 @@ jobs:
         run: dvc repro
 
       - name: Logging (Data versions)
-        run: dvc push
+        run: |
+          dvc remote add -f $cloud_remote $dvc_container_name_path
+          dvc modify $cloud_remote connection_string $connection_string
+          dvc push
+
 
