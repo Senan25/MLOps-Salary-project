@@ -1,4 +1,3 @@
-import pandas as pd
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import OneHotEncoder, RobustScaler
@@ -80,6 +79,4 @@ def func_train():
     save_model_and_params(best_model, grid_search.best_params_, config['model_output'], "best_params.json")
 
     return best_model, X_test, y_test
-
-func_train()
 

@@ -35,4 +35,4 @@ jobs:
       #   uses: azure/setup-cli@v2
 
       - name: Start Development Process (Training, Testing, and Logging)
-        run: python3 train.py
+        run: dvc repro
