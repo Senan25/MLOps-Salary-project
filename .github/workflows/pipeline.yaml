@@ -9,6 +9,10 @@ on:
 jobs:
   integration:  # Model Training, Testing, and Logging
     runs-on: ubuntu-latest
+    env:
+      connection_string: ${{ secrets.connection_string }}
+      raw_data_container_name: ${{ secrets.raw_data_container_name }}
+      raw_data_name: ${{ secrets.raw_data_name }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -29,13 +33,6 @@ jobs:
 
       # - name: Setup Azure CLI
       #   uses: azure/setup-cli@v2
-
-      - name: Login to Azure
-        run: echo 'logining to Azure'
-        env:
-          connection_string: ${{ secrets.connection_string }}
-          raw_data_container_name: ${{ secrets.raw_data_container_name }}
-          raw_data_name: ${{ secrets.raw_data_name }}
 
       - name: Start Development Process (Training, Testing, and Logging)
         run: python3 train.py
