@@ -3,9 +3,11 @@ import os
 from datetime import datetime
 
 ip = os.getenv("mlflow_track_ip")
+ip = "https://" + ip
+print(ip)
 
 # MLflow configuration
-mlflow.set_tracking_uri(f'"https://{ip}"')  # Replace with your remote tracking server URI
+mlflow.set_tracking_uri(ip)  # Replace with your remote tracking server URI
 EXPERIMENT_NAME = "AUTO_PIPELINE"
 mlflow.set_experiment(EXPERIMENT_NAME)
 
