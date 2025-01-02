@@ -15,6 +15,8 @@ jobs:
       raw_data_name: ${{ secrets.raw_data_name }}
       cloud_remote: ${{ secrets.cloud_remote }}  # like aws_remote
       dvc_container_name_path: ${{ secrets.dvc_container_name_path }}
+      mlflow_track_ip: ${{ secrets.mlflow_track_ip }}
+
 
     steps:
       - name: Checkout Code
