@@ -16,6 +16,9 @@ jobs:
       cloud_remote: ${{ secrets.cloud_remote }}  # like aws_remote
       dvc_container_name_path: ${{ secrets.dvc_container_name_path }}
       mlflow_track_ip: ${{ secrets.mlflow_track_ip }}
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
 
 
     steps:
