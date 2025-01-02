@@ -10,7 +10,7 @@ EXPERIMENT_NAME = "AUTO_PIPELINE"
 mlflow.set_experiment(EXPERIMENT_NAME)
 
 # Define paths
-model_path = 'rf_model.pkl'  # Path to your pre-trained model
+model_path = 'serve/rf_model.pkl'  # Path to your pre-trained model
 best_params = 'best_params.json'
 
 if not os.path.exists(model_path):
