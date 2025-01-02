@@ -46,4 +46,8 @@ jobs:
           dvc remote modify $cloud_remote connection_string $connection_string
           dvc push
 
+      - name: Logging (Model Experiments ->  Metadata and Artifacts)
+        run: |
+          python3 model_logging.py
+
 
