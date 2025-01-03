@@ -69,7 +69,6 @@ jobs:
 
         - name: Building and Pushing image to DockerHub
           run: |
-            python3 
             docker build -t sanan25/salary-project-image:latest .
         - name: Checking image
           run: |
