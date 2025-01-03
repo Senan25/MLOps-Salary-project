@@ -15,6 +15,7 @@ mlflow.set_experiment(EXPERIMENT_NAME)
 # Define paths
 model_path = 'serve/rf_model.pkl'  # Path to your pre-trained model
 best_params = 'best_params.json'
+metrics_path = 'evaluation_results.json'
 
 if not os.path.exists(model_path):
     raise FileNotFoundError(f"Model file not found at {model_path}")
@@ -30,7 +31,7 @@ with mlflow.start_run(run_name=run_name) as run:
     mlflow.log_artifact(best_params, artifact_path="models")
     mlflow.log_artifact("dvc.lock", artifact_path="models")
 
-    with open(best_params, 'r') as f:
+    with open(metrics_path, 'r') as f:
         params = json.load(f)
         for key, value in params.items():
             if isinstance(value, (int, float)):  # Log only numeric values as metrics
