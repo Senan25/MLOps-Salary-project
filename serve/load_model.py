@@ -1,7 +1,7 @@
 import mlflow
 import os
 
-def save_latest_model():
+def load_latest_model():
 
     ip = os.getenv("mlflow_track_ip")
     ip = "https://" + ip
