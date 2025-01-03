@@ -25,5 +25,7 @@ with mlflow.start_run(run_name=run_name) as run:
     # Log the model
     mlflow.log_artifact(model_path, artifact_path="models")
     mlflow.log_artifact(best_params, artifact_path="models")
+    mlflow.log_artifact(r"dvc.lock", artifact_path="models")
+
 
     print(f"Run ID: {run.info.run_id}")
