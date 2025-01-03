@@ -28,7 +28,7 @@ def evaluate(best_model, X_test, y_test, config):
 
     # Save metrics to a file
     import json
-    with open(f"{config['model_output']}_evaluation_results.json", "w") as f:
+    with open("evaluation_results.json", "w") as f:
         json.dump(evaluation_results, f, indent=4)
 
-    print(f"Evaluation results saved to {config['model_output']}_evaluation_results.json")
+    print("Evaluation results saved to evaluation_results.json")
