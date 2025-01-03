@@ -1,6 +1,7 @@
 import mlflow
 import os
 from datetime import datetime
+import json
 
 ip = os.getenv("mlflow_track_ip")
 ip = "https://" + ip
@@ -17,6 +18,8 @@ best_params = 'best_params.json'
 
 if not os.path.exists(model_path):
     raise FileNotFoundError(f"Model file not found at {model_path}")
+if not os.path.exists(best_params):
+    raise FileNotFoundError(f"Best parameters file not found at {best_params}")
 
 current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 run_name = f"{current_time}_run"
@@ -27,5 +30,10 @@ with mlflow.start_run(run_name=run_name) as run:
     mlflow.log_artifact(best_params, artifact_path="models")
     mlflow.log_artifact("dvc.lock", artifact_path="models")
 
+    with open(best_params, 'r') as f:
+        params = json.load(f)
+        for key, value in params.items():
+            if isinstance(value, (int, float)):  # Log only numeric values as metrics
+                mlflow.log_metric(key, value)   
 
     print(f"Run ID: {run.info.run_id}")
