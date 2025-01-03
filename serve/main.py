@@ -6,9 +6,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 from fastapi.requests import Request
 import pandas as pd
+from load_model import load_latest_model
 
 # Load the model
-model = load("rf_model.pkl")
+#model = load("rf_model.pkl")
+model = load_latest_model()
 
 app = FastAPI()
 
