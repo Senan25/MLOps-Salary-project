@@ -24,7 +24,7 @@ if not os.path.exists(best_params):
     raise FileNotFoundError(f"Best parameters file not found at {best_params}")
 
 baku_tz = pytz.timezone('Asia/Baku')
-current_time = datetime.now(baku_tz).strftime("%Y-%m-%d_%H-%M-%S")
+current_time = datetime.now(baku_tz).strftime("%Y-%m-%d_%H:%M:%S")
 run_name = f"{current_time}_run"
 
 with mlflow.start_run(run_name=run_name) as run:
