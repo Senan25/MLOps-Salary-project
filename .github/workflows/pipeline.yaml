@@ -48,7 +48,8 @@ jobs:
       - name: Logging (Data versions)
         run: |
           dvc remote add -d $cloud_remote $dvc_container_name_path
-          dvc remote modify --force $cloud_remote connection_string $connection_string
+          dvc config --list  # Verify remote exists
+          dvc remote modify --force $cloud_remote connection_string "$connection_string"
           dvc push
 
       - name: Logging (Model Experiments ->  Metadata and Artifacts)
