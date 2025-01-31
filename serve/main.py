@@ -10,7 +10,7 @@ from load_model import load_latest_model
 
 # Load the model
 #model = load("rf_model.pkl")
-model = load_latest_model()
+#model = load_latest_model()
 
 app = FastAPI()
 
