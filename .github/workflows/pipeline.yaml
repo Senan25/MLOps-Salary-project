@@ -19,8 +19,6 @@ jobs:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-      AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
-      AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
 
 
 
@@ -51,13 +49,9 @@ jobs:
       - name: Logging (Data versions)
         run: |
           dvc remote add -d $cloud_remote $dvc_container_name_path
-          dvc remote modify $cloud_remote account_name $AZURE_STORAGE_ACCOUNT
-          dvc remote modify $cloud_remote account_key $AZURE_STORAGE_KEY
-          
-          # Push data
+          dvc remote modify $cloud_remote connection_string $connection_string
           dvc push
 
-  
 
       - name: Logging (Model Experiments ->  Metadata and Artifacts)
         run: |
