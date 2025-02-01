@@ -7,27 +7,19 @@ def load_latest_model():
     ip = "https://" + ip
 
     mlflow.set_tracking_uri(ip) 
+    # Define Model Name (same as in MLflow Registry)
     experiment_name = "AUTO_PIPELINE"
-    # Experiment ID'yi al
-    experiment = mlflow.get_experiment_by_name(experiment_name)
-    if experiment is None:
-        raise ValueError(f"Experiment '{experiment_name}' bulunamadı.")
-    
-    experiment_id = experiment.experiment_id
+    model_name = experiment_name + "_MODEL"
 
-    runs = mlflow.search_runs(experiment_ids=[experiment_id], order_by=["start_time DESC"], max_results=1)
-    if runs.empty:
-        raise ValueError(f"Experiment '{experiment_name}' için herhangi bir run bulunamadı.")
-    
-    latest_run_id = runs.iloc[0]['run_id']
-    print(f"En son Run ID: {latest_run_id}")
+    # Get the latest production model URI
+    client = mlflow.MlflowClient()
+    versions = client.get_latest_versions(model_name, stages=["Production"])
+    if not versions:
+        raise ValueError(f"No versions of model '{model_name}' found in Production!")
 
-    # Model URI oluştur
-    model_uri = f"runs:/{latest_run_id}/model"
-    
-    # Modeli yükle
-    model = mlflow.pyfunc.load_model(model_uri)
+    production_model_uri = f"models:/{model_name}/Production"
+    print(f"Loading model from: {production_model_uri}")
 
-    print(type(model))
-
+    # Load the model
+    model = mlflow.pyfunc.load_model(production_model_uri)
     return model
