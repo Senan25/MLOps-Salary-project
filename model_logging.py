@@ -11,10 +11,8 @@ if ip:
 else:
     raise ValueError("Environment variable 'mlflow_track_ip' is not set")
 
-print(f"MLflow Tracking URI: {ip}")
-
-# MLflow configuration
-mlflow.set_tracking_uri(ip)  # Set the remote tracking server URI
+# Set MLflow Tracking URI
+mlflow.set_tracking_uri(ip)
 
 EXPERIMENT_NAME = "AUTO_PIPELINE"
 MODEL_NAME = EXPERIMENT_NAME + "_MODEL"  # Dynamic model name based on the experiment
@@ -50,11 +48,21 @@ with mlflow.start_run(run_name=run_name) as run:
 
     # Get Run ID
     run_id = run.info.run_id
-    print(f"Run ID: {run_id}")
 
     # Model registry URI (Artifacts path for this run)
     model_uri = f"runs:/{run_id}/models"
 
     # Register the model
     registered_model = mlflow.register_model(model_uri, MODEL_NAME)
-    print(f"Model registered with name: {registered_model.name} and version: {registered_model.version}")
+    model_version = registered_model.version
+
+    print(f"Model registered with name: {MODEL_NAME}, version: {model_version}")
+
+    # Promote model to Production
+    client = mlflow.MlflowClient()
+    client.transition_model_version_stage(
+        name=MODEL_NAME,
+        version=model_version,
+        stage="Production"
+    )
+    print(f"Model {MODEL_NAME} version {model_version} is now in Production!")
