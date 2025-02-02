@@ -56,6 +56,13 @@ jobs:
       - name: Logging (Model Experiments ->  Metadata and Artifacts)
         run: |
           python3 model_logging.py
+          
+      - name: Upload Model as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-artifact
+          path: rf_model.pkl
+
 
 
   Deployment:
@@ -64,6 +71,16 @@ jobs:
     steps: 
         - name: Checkout Code
           uses: actions/checkout@v3
+
+        - name: Download Model Artifact
+          uses: actions/download-artifact@v4
+          with:
+            name: model-artifact
+            path: serve  # Place inside 'serve/' folder before building Docker image
+
+        - name: Verify Model Exists
+          run: ls -l serve/
+
 
         - name: Logging to DockerHub
           run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
