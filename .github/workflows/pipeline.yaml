@@ -89,7 +89,7 @@ jobs:
 
         - name: Building and Pushing image to DockerHub
           run: |
-            docker build -t sanan25/salary-project-image:latest serve\
+            docker build --no-cache -t sanan25/salary-project-image:latest serve\
         - name: Checking image
           run: |
             docker images -a
