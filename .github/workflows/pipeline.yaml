@@ -56,6 +56,7 @@ jobs:
       - name: Logging (Model Experiments ->  Metadata and Artifacts)
         run: |
           python3 model_logging.py
+          ls -l serve
           
       - name: Upload Model as Artifact
         uses: actions/upload-artifact@v4
