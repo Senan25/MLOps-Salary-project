@@ -6,6 +6,7 @@ on:
     branches:
       - main
   repository_dispatch:
+    types: [azure_blob_change_event]
 
 jobs:
   Integration:  # Model Training, Testing, and Logging
