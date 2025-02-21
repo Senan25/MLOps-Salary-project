@@ -62,4 +62,5 @@ This project implements a **CI/CD/CT (Continuous Integration, Continuous Deploym
 - **YAML** - Stores constants, parameters, and pipeline configurations.
 - **GitHub Secrets** - Stores sensitive credentials securely.
 
-## 🔁 Workflow
+## 🔁 Workflow Diagram
+![](https://github.com/Senan25/MLOps-Salary-project/blob/main/Untitled%20Diagram.drawio.svg)
